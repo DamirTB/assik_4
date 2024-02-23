@@ -1,0 +1,25 @@
+<!-- posts.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Posts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>List of Posts</h1>
+        <% posts.forEach(post => { %>
+        <div class="shadow-lg p-5 my-5 rounded">
+            <h2><%= post.name %></h2>
+            <h3> Created by <%= post.author %> </h3>
+            <p> <%= post.text %> </p>
+            <a href="/post/<%= post.id %>" class="white-text btn btn-outline-secondary">View</a>
+        </div>
+        <% }); %>
+    </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
