@@ -1,3 +1,18 @@
+## Setup to use the application
+
+```
+npm install
+```
+
+```
+npm start
+```
+
+
+## PgAdmin create tables
+
+Create those tables in your database postgres
+
 ```
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -16,6 +31,16 @@ CREATE TABLE posts (
     post_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```
+CREATE TABLE comments (
+    comment_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
+    post_id INT REFERENCES posts(post_id) ON DELETE CASCADE,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-const loginRequired = require('../middleware/loginRequired');
+const { loginRequired } = require('../middleware/middleware');
 const pool = require('../db/db')
 
 router.get('/sign-in', (req, res) =>{

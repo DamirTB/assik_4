@@ -8,14 +8,17 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <%- include('navbar_log.ejs') %>
     <div class="container">
         <h1>List of Posts</h1>
         <% posts.forEach(post => { %>
         <div class="shadow-lg p-5 my-5 rounded">
-            <h2><%= post.name %></h2>
-            <h3> Created by <%= post.author %> </h3>
-            <p> <%= post.text %> </p>
-            <a href="/post/<%= post.id %>" class="white-text btn btn-outline-secondary">View</a>
+            <h2><%= post.title %></h2>
+            <a href="/post/<%= post.post_id %>" class="white-text btn btn-outline-secondary">View</a>
+            <% if (user && user.user_id && user.user_id == post.user_id) { %>
+                <a href="/post/delete/<%= post.post_id %>" class="white-text btn btn-outline-secondary">Delete</a>
+                <a href="/post/delete/<%= post.post_id %>" class="white-text btn btn-outline-secondary">Edit</a>
+            <% } %>
         </div>
         <% }); %>
     </div>

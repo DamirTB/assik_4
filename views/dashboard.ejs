@@ -8,17 +8,31 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <%- include('navbar_log.ejs') %>
     <div class="container">
         <h1> Welcome to the dashboard </h1>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title"><%= user.username %>  </h5>
-              <h6 class="card-subtitle mb-2 text-muted"> <%= user.age %>   </h6>
-              <p class="card-text"> <%= user.time_stamp %>   </p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+        <div class="row">
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= user.username %>  </h5>
+                      <h6 class="card-subtitle mb-2 text-muted"> <%= user.age %>   </h6>
+                      <p class="card-text"> <%= user.time_stamp %>   </p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>          
             </div>
-        </div>          
+            <div class="col-sum">
+            </div>
+        </div>
+        <form action="/post/create" method="post">
+            <label for="name">Write a title </label>
+            <input type="text" name="title" class="form-group form-control" required />
+            <label for="name">Write a text</label>
+            <textarea id="text" name="content" class="form-group form-control"> </textarea>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
     </div>
 </body>
 </html>

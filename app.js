@@ -22,6 +22,12 @@ app.use(session({
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes);
 
+const postRoutes = require('./routes/post')
+app.use('/post', postRoutes)
+
+const adminRoutes = require('./routes/admin')
+app.use('/admin', adminRoutes)
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
