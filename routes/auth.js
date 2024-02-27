@@ -10,7 +10,7 @@ router.get('/sign-in', (req, res) =>{
       res.redirect('/dashboard');
       return;
     }
-    res.render('login')
+    res.render('auth/login')
 });
 
 router.post('/sign-in', async (req, res) => {
@@ -40,7 +40,7 @@ router.get('/sign-up', (req, res) => {
       res.redirect('/dashboard');
       return;
     }
-    res.render('registration')
+    res.render('auth/registration')
 });
 
 router.post('/sign-up', async (req, res) => {
@@ -59,7 +59,7 @@ router.post('/sign-up', async (req, res) => {
 });
 
 router.get('/dashboard', loginRequired, (req, res) => {
-    res.render('dashboard', {user:req.session.user});
+    res.render('auth/dashboard', {user:req.session.user});
 });
 
 router.get('/sign-out', loginRequired, (req, res) => {

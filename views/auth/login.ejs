@@ -6,7 +6,7 @@
   <title>Login Page</title>
 </head>
 <body>
-  <%- include('navbar.ejs') %>
+  <%- include('../navbar.ejs') %>
 
   <div class="container">
     <h1> Login page </h1>
@@ -14,9 +14,10 @@
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" class="form-group form-control" required /><br />
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" class="form-group form-control" required /><br />
+      <input type="password" id="password" name="password" class="form-group form-control" required /> 
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <a href="/auth/sign-up"> Register</a>
   </div>
 </body>
 

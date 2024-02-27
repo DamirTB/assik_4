@@ -12,7 +12,6 @@ router.post('/create', loginRequired, async(req, res) => {
         const values = [title, content, author];
         const result = await pool.query(query, values);
         res.redirect('/post/forum');
-        //res.status(201).send("everyting is ok");
     }catch(error){
         console.error(error);
         res.status(500).send("error craeting post");
@@ -24,7 +23,7 @@ router.get('/forum', loginRequired, async(req, res) => {
         const query = 'SELECT * FROM posts';
         const {rows} = await pool.query(query);
         const user = req.session.user
-        res.render('posts', {posts : rows, user : user});
+        res.render('post/posts', {posts : rows, user : user});
     }catch(error){
         console.error(error);
     }
@@ -46,11 +45,10 @@ router.get('/:id', loginRequired, async (req, res) => {
         const id = req.params.id;
         const query = `SELECT * FROM "posts" WHERE post_id = $1`;
         const row = await pool.query(query, [id]);
-        res.render('single_post', { post: row.rows[0] }); // Access row.rows[0]
+        res.render('post/single_post', { post: row.rows[0] });
     } catch (error) {
         console.error(error);
     }
 });
-
 
 module.exports = router

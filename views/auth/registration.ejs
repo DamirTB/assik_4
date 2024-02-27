@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Registration Page</title>
 </head>
-<%- include('navbar.ejs') %>
+<%- include('../navbar.ejs') %>
 <body>
   <div class="container">
     <div class="row">
@@ -17,14 +17,14 @@
         <input type="text" id="username" name="username" class="form-control" required><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" class="form-control" required><br>
-        <br>
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" class="form-control" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
-        </select><br><br>
+        </select> <br />
         <button type="submit" class = "btn btn-primary">Register</button>
       </form>
+      <a href="/auth/sign-in">login</a>
       </div>
       <div class="col-sm">
       </div>
