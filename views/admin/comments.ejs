@@ -15,20 +15,12 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Username</th>
-                <th scope="col">gender</th>
-                <th scope="col"> </th>
+                <th scope="col">author</th>
+                <th scope="col">comment</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-            <% users.forEach(user => { %>
-              <tr>
-                <th scope="row"> <%= user.user_id  %>  </th>
-                <td> <%= user.username %> </td>
-                <td> <%= user.gender %> </td>
-                <td> <a href="/admin/users/<%= user.user_id %>" class="white-text btn btn-outline-danger">Delete</a> </td>
-              </tr>
-            <% }); %>
             </tbody>
           </table>
     </div>

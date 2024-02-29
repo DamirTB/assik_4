@@ -10,10 +10,25 @@
 <body>
     <%- include('../navbar_log.ejs') %>
     <div class="container">
-        <div class="shadow-lg p-5 my-5 rounded">
-            <h2><%= post.title %></h2>
-            <p> <%= post.content %> </p>
-        </div>
+        <h1> <%= post.title %> </h1>
+        <p> <%= post.content %> </p>
+        <h2> by <%= post.author %> </h2>
+        <form action="/post/<%= post.post_id %>" method="post">
+            <label for="name">Write a comment </label>
+            <input type="text" id="content" name="content" class="form-group form-control" required /><br />
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        <h2>Comments:</h2>
+        <% if (comments.rows.length > 0) { %>
+            <% comments.rows.forEach(comment => { %>
+                <div class="shadow-lg p-5 my-5 rounded">
+                    <h3><%= comment.author %></h3>
+                    <p> <%= comment.content %> </p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No comments yet.</p>
+        <% } %>
     </div>
 </body>
 </html>

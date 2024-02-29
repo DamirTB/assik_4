@@ -32,6 +32,7 @@ CREATE TABLE posts (
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
+    author TEXT NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -42,6 +43,7 @@ CREATE TABLE comments (
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     post_id INT REFERENCES posts(post_id) ON DELETE CASCADE,
     content TEXT NOT NULL,
+    author TEXT NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```

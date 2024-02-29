@@ -28,7 +28,7 @@ app.use('/post', postRoutes)
 const adminRoutes = require('./routes/admin')
 app.use('/admin', adminRoutes)
 
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
   res.redirect('/auth/sign-in');
 })
 

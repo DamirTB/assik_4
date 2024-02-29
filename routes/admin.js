@@ -15,7 +15,7 @@ router.get('/users', roleRequired('admin'), async(req, res) => {
         const cur_user = req.session.user;
         res.render('admin/users', {users : rows});
     }catch(error){
-        console.log(error);
+        console.error(error);
     }
 });
 
@@ -26,8 +26,33 @@ router.get('/users/:id', roleRequired('admin'), async(req, res) => {
         await pool.query(query, [id]);
         res.redirect('/admin/users');
     }catch(error){
-        console.log(error);
+        console.error(error);
     }
+})
+
+router.get('/posts/', roleRequired('admin'), async(req, res) => {
+    try{
+        const query = `SELECT * FROM posts`;
+        const {rows} = await pool.query(query);
+        res.render('admin/posts', {posts:rows})
+    }catch(error){
+        console.error(error);
+    }
+})
+
+router.get('/posts/:id', roleRequired('admin'), async(req, res) => {
+    try{
+        const query = 'DELETE FROM posts WHERE post_id = $1';
+        const id = req.params.id;
+        await pool.query(query, [id]);
+        res.redirect('/admin/posts');
+    }catch(error){
+        console.error(error);
+    }
+})
+
+router.get('/comments', roleRequired('admin'), async(req, res) => {
+    res.render('admin/comments')
 })
 
 module.exports = router

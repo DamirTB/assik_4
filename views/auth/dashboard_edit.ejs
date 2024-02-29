@@ -1,0 +1,25 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <%- include('../navbar_log.ejs') %>
+    <div class="container">
+        <h1> <%= user.gender %> </h1>
+        <form action="/auth/dashboard/edit" method="post">
+            <label for="age">Age</label>
+            <input type="number" name="age" class="form-group form-control" value="<%= user.age %>" required/>
+            <select id="gender" name="gender" class="form-control" required>
+                <option value="male" <% if (user.gender === 'male') { %> selected <% } %>>Male</option>
+                <option value="female" <% if (user.gender === 'female') { %> selected <% } %>>Female</option>
+            </select>            
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</body>
+</html>

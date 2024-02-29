@@ -7,7 +7,7 @@ const pool = require('../db/db')
 
 router.get('/sign-in', (req, res) =>{
     if(req.session.user){
-      res.redirect('/dashboard');
+      res.redirect('/auth/dashboard');
       return;
     }
     res.render('auth/login')
@@ -37,17 +37,17 @@ router.post('/sign-in', async (req, res) => {
   
 router.get('/sign-up', (req, res) => {
     if(req.session.user){
-      res.redirect('/dashboard');
+      res.redirect('/auth/dashboard');
       return;
     }
     res.render('auth/registration')
 });
 
 router.post('/sign-up', async (req, res) => {
-    const { username, password} = req.body;
+    const { username, password, gender} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *';
-    const values = [username, hashedPassword];
+    const query = 'INSERT INTO users (username, password, gender) VALUES ($1, $2, $3) RETURNING *';
+    const values = [username, hashedPassword, gender];
     try{
       const result = await pool.query(query, values);
       req.session.user = result.rows[0];
@@ -61,6 +61,28 @@ router.post('/sign-up', async (req, res) => {
 router.get('/dashboard', loginRequired, (req, res) => {
     res.render('auth/dashboard', {user:req.session.user});
 });
+
+router.get('/dashboard/edit', loginRequired, async(req, res) => {
+  res.render('auth/dashboard_edit', {user:req.session.user})
+});
+
+router.post('/dashboard/edit', loginRequired, async (req, res) => {
+  try {
+      const { age, gender } = req.body;
+      const userId = req.session.user.user_id;
+      const query = `
+          UPDATE users 
+          SET age = $1, gender = $2 
+          WHERE user_id = $3
+      `;
+      await pool.query(query, [age, gender, userId]);
+      res.redirect('/auth/dashboard'); 
+  } catch (error) {
+      console.error('Error updating user:', error);
+      res.status(500).send('Error updating user');
+  }
+});
+
 
 router.get('/sign-out', loginRequired, (req, res) => {
     req.session.destroy(err => {
