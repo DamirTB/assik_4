@@ -52,7 +52,15 @@ router.get('/posts/:id', roleRequired('admin'), async(req, res) => {
 })
 
 router.get('/comments', roleRequired('admin'), async(req, res) => {
-    res.render('admin/comments')
+    try{
+        const query = 'SELECT * FROM comments';
+        const {rows} = await pool.query(query);
+        res.render('admin/comments', {comments:rows});
+    }catch(error){
+        console.error(error);
+    }
 })
+
+router.get('/')
 
 module.exports = router
